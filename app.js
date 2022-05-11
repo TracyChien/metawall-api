@@ -2,6 +2,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+import cors from "cors";
 
 // 程式出現重大錯誤時
 process.on("uncaughtException", (err) => {
@@ -18,6 +19,8 @@ var usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
 
 var app = express();
+
+app.use(cors());
 
 app.use(logger("dev"));
 app.use(express.json());
