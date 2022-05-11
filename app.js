@@ -1,8 +1,8 @@
+const cors = require("cors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-import cors from "cors";
 
 // 程式出現重大錯誤時
 process.on("uncaughtException", (err) => {
