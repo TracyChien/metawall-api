@@ -30,6 +30,10 @@ const users = {
     if (!validator.isEmail(email)) {
       errorMsgArr.push("Email 格式不正確");
     }
+    const hasUser = await User.findOne({ email: email });
+    if (hasUser) {
+      errorMsgArr.push("Email帳號已被註冊，請替換新的 Email！");
+    }
     // 回饋錯誤給使用者
     if (errorMsgArr.length > 0) {
       const errString = errorMsgArr.join();
