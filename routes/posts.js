@@ -23,5 +23,16 @@ router.delete("/", isAuth, async function (req, res, next) {
 router.delete("/:id", isAuth, async function (req, res, next) {
   PostsController.deletedPostById(req, res, next);
 });
+// likes
+router.post("/:id/likes", isAuth, async function (req, res, next) {
+  PostsController.addLike(req, res, next);
+});
+router.delete("/:id/likes", isAuth, async function (req, res, next) {
+  PostsController.removeLike(req, res, next);
+});
+// user
+router.get("/user/:id", isAuth, async function (req, res, next) {
+  PostsController.getPostsByUserId(req, res, next);
+});
 
 module.exports = router;

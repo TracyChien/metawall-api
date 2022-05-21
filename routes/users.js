@@ -22,5 +22,8 @@ router.patch("/profile", isAuth, async function (req, res, next) {
 router.get("/check", isAuth, async function (req, res, next) {
   UserController.check(req, res, next);
 });
+router.get("/getLikeList", isAuth, async function (req, res, next) {
+  UserController.getLikeList(req, res, next);
+});
 
 module.exports = router;

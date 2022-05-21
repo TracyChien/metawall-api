@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
+const Post = require("../models/postsModel");
 const User = require("../models/usersModel");
 const appError = require("../service/appError");
 const handleErrorAsync = require("../service/handleErrorAsync");
@@ -122,6 +123,19 @@ const users = {
         name: req.user.name,
         photo: req.user.photo,
       },
+    });
+  }),
+  getLikeList: handleErrorAsync(async (req, res, next) => {
+    const user = req.user.id;
+    const likeList = await Post.find({
+      likes: { $in: [user] },
+    }).populate({
+      path: "user",
+      select: "name _id",
+    });
+    res.status(200).json({
+      status: "success",
+      likeList,
     });
   }),
 };

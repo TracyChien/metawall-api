@@ -107,6 +107,71 @@ const posts = {
       data: [],
     });
   },
+  addLike: handleErrorAsync(async (req, res, next) => {
+    const id = req.params.id;
+    const user = req.user.id; //form isAuth(token)
+
+    if (!ObjectId.isValid(id)) {
+      return next(appError(400, "查無此id", next));
+    }
+    const newPost = await Post.findByIdAndUpdate(
+      id,
+      {
+        $addToSet: { likes: user },
+      },
+      { new: true }
+    );
+
+    if (newPost !== null) {
+      res.status(200).json({
+        status: "success",
+        data: newPost,
+      });
+    } else {
+      return next(appError(400, "查無此id", next));
+    }
+  }),
+  removeLike: handleErrorAsync(async (req, res, next) => {
+    const id = req.params.id;
+    const user = req.user.id; //form isAuth(token)
+
+    if (!ObjectId.isValid(id)) {
+      return next(appError(400, "查無此id", next));
+    }
+    const newPost = await Post.findByIdAndUpdate(
+      id,
+      {
+        $pull: { likes: user },
+      },
+      { new: true }
+    );
+
+    if (newPost !== null) {
+      res.status(200).json({
+        status: "success",
+        data: newPost,
+      });
+    } else {
+      return next(appError(400, "查無此id", next));
+    }
+  }),
+  getPostsByUserId: async (req, res, next) => {
+    const userId = req.params.id;
+    if (!ObjectId.isValid(userId)) {
+      return next(appError(400, "查無此會員", next));
+    }
+
+    const posts = await Post.find({ user: userId }).populate({
+      path: "user",
+      select: "name photo",
+    });
+
+    res.status(200).json({
+      status: "success",
+      results: posts.length,
+      posts,
+    });
+  },
 };
 
 module.exports = posts;
