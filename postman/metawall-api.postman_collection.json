@@ -239,6 +239,29 @@
 					"response": []
 				},
 				{
+					"name": "刪除所有貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Url}}/posts",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "取得單一貼文",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -257,13 +280,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{Url}}/posts/628521fae9e5ad6b827f759c",
+							"raw": "{{Url}}/posts/6288949ff3a64ca69f57e7a3",
 							"host": [
 								"{{Url}}"
 							],
 							"path": [
 								"posts",
-								"628521fae9e5ad6b827f759c"
+								"6288949ff3a64ca69f57e7a3"
 							]
 						}
 					},
@@ -282,7 +305,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"user\": \"6270a5ff4de271a2efed3645\",\n  \"content\": \"今天要寫作業8\",\n  \"image\":\"\"\n}",
+							"raw": "{\n  \"content\": \"今天要寫作業0521\",\n  \"image\":\"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -314,7 +337,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Json C\",\r\n  \"content\": \"先放空好了\"\r\n}",
+							"raw": "{\r\n  \"content\": \"測試123\",\r\n  \"image\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -322,36 +345,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{Url}}/posts/626367a308a982abc90a61a3",
+							"raw": "{{Url}}/posts/628521fae9e5ad6b827f",
 							"host": [
 								"{{Url}}"
 							],
 							"path": [
 								"posts",
-								"626367a308a982abc90a61a3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "刪除所有貼文",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{Auth}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Url}}/posts",
-							"host": [
-								"{{Url}}"
-							],
-							"path": [
-								"posts"
+								"628521fae9e5ad6b827f"
 							]
 						}
 					},
@@ -376,6 +376,106 @@
 							"path": [
 								"posts",
 								"6263662b08a982abc90a5dbb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增一則貼文的讚",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Url}}/posts/6288ae3edb7074e71f385e0b/likes",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"posts",
+								"6288ae3edb7074e71f385e0b",
+								"likes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消一則貼文的讚",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Url}}/posts/6288ae3edb7074e71f385e0b/likes",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"posts",
+								"6288ae3edb7074e71f385e0b",
+								"likes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得會員所有貼文",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{Url}}/posts/user/6280a91c25fd1c5436fcf904",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"posts",
+								"user",
+								"6280a91c25fd1c5436fcf904"
 							]
 						}
 					},
@@ -414,6 +514,35 @@
 							],
 							"path": [
 								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "會員按讚追踨",
+			"item": [
+				{
+					"name": "取得個人按讚列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Url}}/users/getLikeList",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"users",
+								"getLikeList"
 							]
 						}
 					},
