@@ -15,8 +15,9 @@ process.on("uncaughtException", (err) => {
 require("./connections");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
+const uploadRouter = require("./routes/upload");
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/posts", postsRouter);
 app.use("/users", usersRouter);
+app.use("/upload", uploadRouter);
 
 app.use((req, res) => {
   res.status(404).send("抱歉，您的頁面找不到");
