@@ -19,5 +19,8 @@ router.post("/updatePassword", isAuth, async function (req, res, next) {
 router.patch("/profile", isAuth, async function (req, res, next) {
   UserController.updateProfile(req, res, next);
 });
+router.get("/check", isAuth, async function (req, res, next) {
+  UserController.check(req, res, next);
+});
 
 module.exports = router;

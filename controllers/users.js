@@ -114,6 +114,16 @@ const users = {
       },
     });
   }),
+  check: handleErrorAsync(async (req, res, next) => {
+    res.status(200).json({
+      status: "success",
+      user: {
+        id: req.user.id,
+        name: req.user.name,
+        photo: req.user.photo,
+      },
+    });
+  }),
 };
 
 module.exports = users;
