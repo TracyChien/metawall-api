@@ -8,6 +8,9 @@ const PostsController = require("../controllers/posts");
 router.get("/", isAuth, async function (req, res, next) {
   PostsController.getPosts(req, res, next);
 });
+router.get("/:id", isAuth, async function (req, res, next) {
+  PostsController.getPostById(req, res, next);
+});
 router.post("/", isAuth, async function (req, res, next) {
   PostsController.createdPost(req, res, next);
 });
