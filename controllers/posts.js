@@ -4,7 +4,7 @@ const handleErrorAsync = require("../service/handleErrorAsync");
 // const handleError = require("../service/handleError");
 const appError = require("../service/appError");
 const validator = require("validator");
-const ObjectId = require("mongoose").Types.ObjectId;
+const mongoose = require("mongoose");
 
 const posts = {
   getPosts: async (req, res, next) => {
@@ -24,7 +24,7 @@ const posts = {
   },
   getPostById: async (req, res, next) => {
     const id = req.params.id;
-    if (!ObjectId.isValid(id)) {
+    if (!mongoose.isObjectIdOrHexString(id)) {
       return next(appError(400, "查無此id", next));
     }
     const post = await Post.findById(id).populate({
@@ -61,7 +61,7 @@ const posts = {
     const id = req.params.id;
     const { content, image } = req.body;
 
-    if (!ObjectId.isValid(id)) {
+    if (!mongoose.isObjectIdOrHexString(id)) {
       return next(appError(400, "查無此id", next));
     }
 
@@ -87,7 +87,7 @@ const posts = {
   }),
   deletedPostById: handleErrorAsync(async (req, res, next) => {
     const id = req.params.id;
-    if (!ObjectId.isValid(id)) {
+    if (!mongoose.isObjectIdOrHexString(id)) {
       return next(appError(400, "查無此id", next));
     }
     const delPost = await Post.findByIdAndDelete(id);
@@ -111,7 +111,7 @@ const posts = {
     const id = req.params.id;
     const user = req.user.id; //form isAuth(token)
 
-    if (!ObjectId.isValid(id)) {
+    if (!mongoose.isObjectIdOrHexString(id)) {
       return next(appError(400, "查無此id", next));
     }
     const newPost = await Post.findByIdAndUpdate(
@@ -135,7 +135,7 @@ const posts = {
     const id = req.params.id;
     const user = req.user.id; //form isAuth(token)
 
-    if (!ObjectId.isValid(id)) {
+    if (!mongoose.isObjectIdOrHexString(id)) {
       return next(appError(400, "查無此id", next));
     }
     const newPost = await Post.findByIdAndUpdate(
@@ -157,7 +157,7 @@ const posts = {
   }),
   getPostsByUserId: async (req, res, next) => {
     const userId = req.params.id;
-    if (!ObjectId.isValid(userId)) {
+    if (!mongoose.isObjectIdOrHexString(userId)) {
       return next(appError(400, "查無此會員", next));
     }
 
