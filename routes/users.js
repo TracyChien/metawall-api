@@ -13,7 +13,7 @@ router.post("/sign_in", async function (req, res, next) {
 router.get("/profile", isAuth, async function (req, res, next) {
   UserController.getProfile(req, res, next);
 });
-router.post("/updatePassword", isAuth, async function (req, res, next) {
+router.patch("/updatePassword", isAuth, async function (req, res, next) {
   UserController.updatePassword(req, res, next);
 });
 router.patch("/profile", isAuth, async function (req, res, next) {

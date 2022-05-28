@@ -12,7 +12,7 @@ router.post(
   isAuth,
   upload,
   handleErrorAsync(async (req, res, next) => {
-    if (!req.files.length) {
+    if (!req.files || !req.files.length) {
       return next(appError(400, "尚未上傳檔案", next));
     }
     const dimensions = sizeOf(req.files[0].buffer);

@@ -27,12 +27,19 @@ router.delete("/:id", isAuth, async function (req, res, next) {
 router.post("/:id/likes", isAuth, async function (req, res, next) {
   PostsController.addLike(req, res, next);
 });
-router.delete("/:id/likes", isAuth, async function (req, res, next) {
+router.delete("/:id/unlikes", isAuth, async function (req, res, next) {
   PostsController.removeLike(req, res, next);
 });
 // user
 router.get("/user/:id", isAuth, async function (req, res, next) {
   PostsController.getPostsByUserId(req, res, next);
+});
+// comment
+router.post("/:id/comment", isAuth, async function (req, res, next) {
+  PostsController.addComment(req, res, next);
+});
+router.patch("/comment/:id", isAuth, async function (req, res, next) {
+  PostsController.updateComment(req, res, next);
 });
 
 module.exports = router;
