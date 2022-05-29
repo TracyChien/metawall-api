@@ -21,6 +21,10 @@ const posts = {
         path: "comments",
         select: "comment user",
       })
+      .populate({
+        path: "likes",
+        select: "name",
+      })
       .sort(timeSort);
     res.status(200).json({
       status: "success",
@@ -40,6 +44,10 @@ const posts = {
       .populate({
         path: "comments",
         select: "comment user",
+      })
+      .populate({
+        path: "likes",
+        select: "name",
       });
     if (post !== null) {
       res.status(200).json({
@@ -79,12 +87,21 @@ const posts = {
       return next(appError(400, "你沒有填寫 content 資料", next));
     }
     // check post exist
-    const curPost = await Post.findById(id);
+    const curPost = await Post.findById(id)
+      .populate({
+        path: "user",
+        select: "name photo",
+      })
+      .populate({
+        path: "comments",
+        select: "comment user",
+      });
     if (curPost === null) {
       return next(appError(400, "查無此id", next));
     }
     // check post create user id = update user id
-    const curCommentUserId = curPost.user;
+    const curCommentUserId = curPost.user.id;
+    console.log(curPost);
     if (curCommentUserId !== user) {
       return next(appError(400, "無編輯權限", next));
     }
