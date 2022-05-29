@@ -2,20 +2,21 @@
 	"info": {
 		"_postman_id": "8779bc9e-7c99-45a6-bd3a-889f103fdadc",
 		"name": "metawall-api",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7089989"
 	},
 	"item": [
 		{
 			"name": "會員功能",
 			"item": [
 				{
-					"name": "使用者註冊",
+					"name": "註冊會員",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"abc123@gmail.com\", \n    \"password\":\"abc123abc123\", \n    \"confirmPassword\":\"abc123abc123\", \n    \"name\":\"abc123\"\n}",
+							"raw": "{\n    \"email\":\"fgh123@gmail.com\", \n    \"password\":\"fgh11111\", \n    \"confirmPassword\":\"fgh11111\", \n    \"name\":\"fgh\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -36,13 +37,13 @@
 					"response": []
 				},
 				{
-					"name": "使用者登入",
+					"name": "登入會員",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"abc123@gmail.com\", \n    \"password\":\"abc123abc456\"\n}",
+							"raw": "// {\n//     \"email\":\"abc123@gmail.com\", \n//     \"password\":\"abc123abc456\"\n// }\n{\n    \"email\":\"fgh123@gmail.com\",\n    \"password\":\"fgh11111\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -65,7 +66,7 @@
 				{
 					"name": "重設密碼",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "Authorization",
@@ -96,9 +97,12 @@
 					"response": []
 				},
 				{
-					"name": "更新使用者資料",
+					"name": "取得個人資料",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "PATCH",
+						"method": "GET",
 						"header": [
 							{
 								"key": "authorization",
@@ -108,7 +112,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"abc123\",\n    \"sex\":\"female\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -129,12 +133,9 @@
 					"response": []
 				},
 				{
-					"name": "取得使用者資料",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "更新個人資料",
 					"request": {
-						"method": "GET",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "authorization",
@@ -144,7 +145,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\n    \"name\":\"abc1234\",\n    \"sex\":\"female\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -239,29 +240,6 @@
 					"response": []
 				},
 				{
-					"name": "刪除所有貼文",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{Auth}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Url}}/posts",
-							"host": [
-								"{{Url}}"
-							],
-							"path": [
-								"posts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "取得單一貼文",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -280,13 +258,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{Url}}/posts/6288949ff3a64ca69f57e7a3",
+							"raw": "{{Url}}/posts/{{PostId}}",
 							"host": [
 								"{{Url}}"
 							],
 							"path": [
 								"posts",
-								"6288949ff3a64ca69f57e7a3"
+								"{{PostId}}"
 							]
 						}
 					},
@@ -325,63 +303,6 @@
 					"response": []
 				},
 				{
-					"name": "修改單筆貼文",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{Auth}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"content\": \"測試123\",\r\n  \"image\":\"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{Url}}/posts/628521fae9e5ad6b827f",
-							"host": [
-								"{{Url}}"
-							],
-							"path": [
-								"posts",
-								"628521fae9e5ad6b827f"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "刪除單筆貼文",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{Auth}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{Url}}/posts/6263662b08a982abc90a5dbb",
-							"host": [
-								"{{Url}}"
-							],
-							"path": [
-								"posts",
-								"6263662b08a982abc90a5dbb"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "新增一則貼文的讚",
 					"request": {
 						"method": "POST",
@@ -402,13 +323,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{Url}}/posts/6288ae3edb7074e71f385e0b/likes",
+							"raw": "{{Url}}/posts/{{PostId}}/likes",
 							"host": [
 								"{{Url}}"
 							],
 							"path": [
 								"posts",
-								"6288ae3edb7074e71f385e0b",
+								"{{PostId}}",
 								"likes"
 							]
 						}
@@ -436,14 +357,82 @@
 							}
 						},
 						"url": {
-							"raw": "{{Url}}/posts/6288ae3edb7074e71f385e0b/likes",
+							"raw": "{{Url}}/posts/6288ae3edb7074e71f385e0b/unlikes",
 							"host": [
 								"{{Url}}"
 							],
 							"path": [
 								"posts",
 								"6288ae3edb7074e71f385e0b",
-								"likes"
+								"unlikes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增一則貼文的留言",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Url}}/posts/{{PostId}}/comment",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"posts",
+								"{{PostId}}",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改一則貼文的留言",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"112\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Url}}/posts/comment/{{CommentId}}",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"posts",
+								"comment",
+								"{{CommentId}}"
 							]
 						}
 					},
@@ -468,14 +457,94 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{Url}}/posts/user/6280a91c25fd1c5436fcf904",
+							"raw": "{{Url}}/posts/user/{{UserId}}",
 							"host": [
 								"{{Url}}"
 							],
 							"path": [
 								"posts",
 								"user",
-								"6280a91c25fd1c5436fcf904"
+								"{{UserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改單筆貼文",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"content\": \"測試0528\",\r\n  \"image\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Url}}/posts/{{PostId}}",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"posts",
+								"{{PostId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除單筆貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Url}}/posts/{{PostId}}",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"posts",
+								"{{PostId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除所有貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Url}}/posts",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"posts"
 							]
 						}
 					},
@@ -518,14 +587,9 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "會員按讚追踨",
-			"item": [
+				},
 				{
-					"name": "取得個人按讚列表",
+					"name": "金流測試",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -536,6 +600,99 @@
 							}
 						],
 						"url": {
+							"raw": "{{Url}}/payment",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "會員按讚追踨",
+			"item": [
+				{
+					"name": "追蹤朋友",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{Url}}/users/{{UserId}}/follow",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"users",
+								"{{UserId}}",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消追蹤朋友",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{Url}}/users/{{UserId}}/unfollow",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"users",
+								"{{UserId}}",
+								"unfollow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人按讚列表",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
 							"raw": "{{Url}}/users/getLikeList",
 							"host": [
 								"{{Url}}"
@@ -543,6 +700,68 @@
 							"path": [
 								"users",
 								"getLikeList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人追蹤名單",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{Url}}/users/following",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"users",
+								"following"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人粉絲名單",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{Url}}/users/followers",
+							"host": [
+								"{{Url}}"
+							],
+							"path": [
+								"users",
+								"followers"
 							]
 						}
 					},
