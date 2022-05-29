@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"fgh123@gmail.com\", \n    \"password\":\"fgh11111\", \n    \"confirmPassword\":\"fgh11111\", \n    \"name\":\"fgh\"\n}",
+							"raw": "{\n    \"email\":\"qq@gmail.com\", \n    \"password\":\"qqqqqqqq\", \n    \"confirmPassword\":\"qqqqqqqq\", \n    \"name\":\"QQ\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "// {\n//     \"email\":\"abc123@gmail.com\", \n//     \"password\":\"abc123abc456\"\n// }\n{\n    \"email\":\"fgh123@gmail.com\",\n    \"password\":\"fgh11111\"\n}\n",
+							"raw": "\n{\n    \"email\":\"qq@gmail.com\",\n    \"password\":\"qqqqqqqq\"\n}\n\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -76,7 +76,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"password\":\"abc123abc456\",\n    \"confirmPassword\":\"abc123abc456\"\n}",
+							"raw": "{\n    \"password\":\"wwwwwwww\",\n    \"confirmPassword\":\"wwwwwwww\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -218,7 +218,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{Url}}/posts?timeSort=asc&q=1",
+							"raw": "{{Url}}/posts?timeSort=asc&q=",
 							"host": [
 								"{{Url}}"
 							],
@@ -232,7 +232,7 @@
 								},
 								{
 									"key": "q",
-									"value": "1"
+									"value": ""
 								}
 							]
 						}
@@ -283,7 +283,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"content\": \"今天要寫作業0521\",\n  \"image\":\"\"\n}",
+							"raw": "{\n  \"content\": \"今天要寫作業01\",\n  \"image\":\"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -357,13 +357,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{Url}}/posts/6288ae3edb7074e71f385e0b/unlikes",
+							"raw": "{{Url}}/posts/{{PostId}}/unlikes",
 							"host": [
 								"{{Url}}"
 							],
 							"path": [
 								"posts",
-								"6288ae3edb7074e71f385e0b",
+								"{{PostId}}",
 								"unlikes"
 							]
 						}
@@ -383,7 +383,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"comment\": \"\"\r\n}",
+							"raw": "{\r\n    \"comment\": \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -483,7 +483,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"content\": \"測試0528\",\r\n  \"image\":\"\"\r\n}",
+							"raw": "{\r\n  \"content\": \"測試qq\",\r\n  \"image\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
