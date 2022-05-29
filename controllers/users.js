@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 const Post = require("../models/postsModel");
 const User = require("../models/usersModel");
 const appError = require("../service/appError");
@@ -129,13 +130,107 @@ const users = {
     const user = req.user.id;
     const likeList = await Post.find({
       likes: { $in: [user] },
-    }).populate({
-      path: "user",
-      select: "name _id",
-    });
+    })
+      .populate({
+        path: "user",
+        select: "name _id",
+      })
+      .populate({
+        path: "likes",
+        select: "name",
+      });
     res.status(200).json({
       status: "success",
       likeList,
+    });
+  }),
+  follow: handleErrorAsync(async (req, res, next) => {
+    const TokenUserId = req.user.id; //from token
+    const userId = req.params.id;
+
+    if (!mongoose.isObjectIdOrHexString(userId)) {
+      return next(appError(400, "無效id", next));
+    }
+
+    if (TokenUserId === userId) {
+      return next(appError(401, "您無法追蹤自己", next));
+    }
+    await User.updateOne(
+      {
+        _id: TokenUserId,
+        "following.user": { $ne: userId },
+      },
+      {
+        $addToSet: { following: { user: userId } },
+      }
+    );
+    await User.updateOne(
+      {
+        _id: userId,
+        "followers.user": { $ne: TokenUserId },
+      },
+      {
+        $addToSet: { followers: { user: TokenUserId } },
+      }
+    );
+    res.status(200).json({
+      status: "success",
+      message: "您已成功追蹤！",
+    });
+  }),
+  unFollow: handleErrorAsync(async (req, res, next) => {
+    const TokenUserId = req.user.id; //from token
+    const userId = req.params.id;
+
+    if (!mongoose.isObjectIdOrHexString(userId)) {
+      return next(appError(400, "無效id", next));
+    }
+
+    if (TokenUserId === userId) {
+      return next(appError(401, "您無法取消追蹤自己", next));
+    }
+
+    await User.updateOne(
+      {
+        _id: TokenUserId,
+      },
+      {
+        $pull: { following: { user: userId } },
+      }
+    );
+    await User.updateOne(
+      {
+        _id: userId,
+      },
+      {
+        $pull: { followers: { user: TokenUserId } },
+      }
+    );
+    res.status(200).json({
+      status: "success",
+      message: "您已成功取消追蹤！",
+    });
+  }),
+  getFollowing: handleErrorAsync(async (req, res, next) => {
+    const TokenUserId = req.user.id; //from token
+    const response = await User.findById(TokenUserId).populate({
+      path: "following.user",
+      select: "name",
+    });
+    res.status(200).json({
+      status: "success",
+      following: response.following,
+    });
+  }),
+  getFollowers: handleErrorAsync(async (req, res, next) => {
+    const TokenUserId = req.user.id; //from token
+    const response = await User.findById(TokenUserId).populate({
+      path: "followers.user",
+      select: "name",
+    });
+    res.status(200).json({
+      status: "success",
+      followers: response.followers,
     });
   }),
 };

@@ -25,5 +25,17 @@ router.get("/check", isAuth, async function (req, res, next) {
 router.get("/getLikeList", isAuth, async function (req, res, next) {
   UserController.getLikeList(req, res, next);
 });
+router.post("/:id/follow", isAuth, async function (req, res, next) {
+  UserController.follow(req, res, next);
+});
+router.delete("/:id/unfollow", isAuth, async function (req, res, next) {
+  UserController.unFollow(req, res, next);
+});
+router.get("/following", isAuth, async function (req, res, next) {
+  UserController.getFollowing(req, res, next);
+});
+router.get("/followers", isAuth, async function (req, res, next) {
+  UserController.getFollowers(req, res, next);
+});
 
 module.exports = router;
