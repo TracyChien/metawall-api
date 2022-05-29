@@ -14,7 +14,7 @@ const users = {
     const errorMsgArr = [];
     // 內容不可為空
     if (!email || !password || !confirmPassword || !name) {
-      errorMsgArr.push("欄位未填寫正確！");
+      return next(appError("400", "欄位未填寫正確！", next));
     }
     // 密碼正確
     if (password !== confirmPassword) {

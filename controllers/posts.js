@@ -125,7 +125,15 @@ const posts = {
       return next(appError(400, "無效id", next));
     }
     // check post exist
-    const curPost = await Post.findById(id);
+    const curPost = await Post.findById(id)
+      .populate({
+        path: "user",
+        select: "name photo",
+      })
+      .populate({
+        path: "comments",
+        select: "comment user",
+      });
     if (curPost === null) {
       return next(appError(400, "查無此id", next));
     }
