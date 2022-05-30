@@ -20,6 +20,7 @@ const pay = {
       HashKey: process.env.ECPAY_HASH_KEY,
       HashIV: process.env.ECPAY_HASH_IV,
       ReturnURL: process.env.ECPAY_RETURNN_URL,
+      OrderResultURL: process.env.ORDER_RESULT_URL,
     });
     const baseParams = {
       MerchantTradeNo: newPay.tradeNo,
@@ -66,9 +67,7 @@ const pay = {
     //   status: "success",
     //   data: updatePay,
     // });
-    // res.status(200).send(RtnMsg);
-    // 待換成前端連結
-    res.status(200).redirect(process.env.FRONTEND_URL);
+    res.status(200).send("OK");
   }),
   getTradeResult: handleErrorAsync(async (req, res, next) => {
     const user = req.user.id;
