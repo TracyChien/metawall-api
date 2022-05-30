@@ -15,12 +15,14 @@ const pay = {
       tradeNo: `MWW${no}`,
       user: user,
     });
+    // const orderUrl = process.env.ORDER_RESULT_URL + newPay.id;
     const merchant = new Merchant("Test", {
       MerchantID: process.env.ECPAY_MERCHANT_ID,
       HashKey: process.env.ECPAY_HASH_KEY,
       HashIV: process.env.ECPAY_HASH_IV,
       ReturnURL: process.env.ECPAY_RETURNN_URL,
       OrderResultURL: process.env.ORDER_RESULT_URL,
+      ClientBackURL: process.env.ORDER_RESULT_URL,
     });
     const baseParams = {
       MerchantTradeNo: newPay.tradeNo,
@@ -28,6 +30,8 @@ const pay = {
       TotalAmount: newPay.totalAmount,
       TradeDesc: newPay.tradeDesc,
       ItemName: newPay.itemName,
+      OrderResultURL: process.env.ORDER_RESULT_URL,
+      ClientBackURL: process.env.ORDER_RESULT_URL,
     };
     const params = {
       // 皆為選填
@@ -37,7 +41,6 @@ const pay = {
       Redeem: "Y", // 紅利折抵: undefined(不用) | 'Y' (使用)
       UnionPay: 2, // [需申請] 銀聯卡: 0 (可用, default) | 1 (導至銀聯網) | 2 (不可用)
     };
-    // console.log("baseParams", baseParams);
     const payment = await merchant.createPayment(
       CreditOneTimePayment,
       baseParams,
