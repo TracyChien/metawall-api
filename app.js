@@ -18,6 +18,7 @@ var indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
 const uploadRouter = require("./routes/upload");
+const paymentRouter = require("./routes/pay");
 
 var app = express();
 
@@ -25,7 +26,7 @@ app.use(cors());
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -33,6 +34,7 @@ app.use("/", indexRouter);
 app.use("/posts", postsRouter);
 app.use("/users", usersRouter);
 app.use("/upload", uploadRouter);
+app.use("/pay", paymentRouter);
 
 app.use((req, res) => {
   res.status(404).send("抱歉，您的頁面找不到");

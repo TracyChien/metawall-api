@@ -37,5 +37,11 @@ router.get("/following", isAuth, async function (req, res, next) {
 router.get("/followers", isAuth, async function (req, res, next) {
   UserController.getFollowers(req, res, next);
 });
+router.get("/getTradeList", isAuth, async function (req, res, next) {
+  UserController.getTradeList(req, res, next);
+});
+router.get("/checkPay", isAuth, async function (req, res, next) {
+  UserController.checkPay(req, res, next);
+});
 
 module.exports = router;

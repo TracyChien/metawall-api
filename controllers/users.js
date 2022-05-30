@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const Post = require("../models/postsModel");
 const User = require("../models/usersModel");
+const Pay = require("../models/payModel");
 const appError = require("../service/appError");
 const handleErrorAsync = require("../service/handleErrorAsync");
 const { generateSendJWT } = require("../service/auth");
@@ -231,6 +232,33 @@ const users = {
     res.status(200).json({
       status: "success",
       followers: response.followers,
+    });
+  }),
+  getTradeList: handleErrorAsync(async (req, res, next) => {
+    const TokenUserId = req.user.id; //from token
+
+    const list = await Pay.find(
+      { user: TokenUserId },
+      "tradeNo tradeType totalAmount tradeDesc itemName tradeStatus ecPayRtnMsg user"
+    );
+
+    res.status(200).json({
+      status: "success",
+      results: list.length,
+      list,
+    });
+  }),
+  checkPay: handleErrorAsync(async (req, res, next) => {
+    const TokenUserId = req.user.id; //from token
+
+    const pay = await Pay.find(
+      { user: TokenUserId, tradeStatus: 0 },
+      "tradeNo tradeType totalAmount tradeDesc itemName tradeStatus ecPayRtnMsg user, createdAt"
+    );
+
+    res.status(200).json({
+      status: "success",
+      result: pay,
     });
   }),
 };
