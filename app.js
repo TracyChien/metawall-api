@@ -3,6 +3,8 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger-output.json");
 
 // 程式出現重大錯誤時
 process.on("uncaughtException", (err) => {
@@ -19,6 +21,7 @@ const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
 const uploadRouter = require("./routes/upload");
 const paymentRouter = require("./routes/pay");
+const authRouter = require("./routes/auth");
 
 var app = express();
 
@@ -35,6 +38,8 @@ app.use("/posts", postsRouter);
 app.use("/users", usersRouter);
 app.use("/upload", uploadRouter);
 app.use("/pay", paymentRouter);
+app.use("/auth", authRouter);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {
   res.status(404).send("抱歉，您的頁面找不到");

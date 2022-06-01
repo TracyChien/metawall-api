@@ -55,6 +55,9 @@ const userSchema = new mongoose.Schema({
       type: Date,
     },
   },
+  googleID: {
+    type: String,
+  },
 });
 // User
 const User = mongoose.model("user", userSchema);
