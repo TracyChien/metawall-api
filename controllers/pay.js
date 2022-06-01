@@ -93,6 +93,10 @@ const pay = {
       "tradeNo tradeType totalAmount tradeDesc itemName tradeStatus ecPayRtnMsg user"
     ).exec();
 
+    if (payRecord === null) {
+      return next(appError(400, "查無資料", next));
+    }
+
     const payUser = payRecord.user.id;
     if (payUser !== user) {
       return next(appError(400, "無權限查看", next));
