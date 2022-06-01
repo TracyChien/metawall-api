@@ -34,6 +34,14 @@ commentSchema.pre(/^find/, function (next) {
 
   next();
 });
+commentSchema.pre(/save/, function (next) {
+  this.populate({
+    path: "user",
+    select: "name id createdAt",
+  });
+
+  next();
+});
 
 const Comment = mongoose.model("Comment", commentSchema);
 

@@ -138,7 +138,7 @@ const posts = {
       return next(appError(400, "查無此id", next));
     }
     // check post create user id = update user id
-    const curCommentUserId = curPost.user;
+    const curCommentUserId = curPost.user.id;
     if (curCommentUserId !== user) {
       return next(appError(400, "無刪除權限", next));
     }
@@ -239,6 +239,7 @@ const posts = {
       user,
       comment,
     });
+    // const nComment = await Comment.findById(newComment.id);
     res.status(201).json({
       status: "success",
       data: {

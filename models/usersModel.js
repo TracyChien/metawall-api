@@ -47,6 +47,14 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  premiumMember: {
+    //0 = false, 1=true
+    paid: { type: Number, enum: [0, 1], default: 0 },
+    pay: { type: mongoose.Schema.ObjectId, ref: "pay" },
+    startAt: {
+      type: Date,
+    },
+  },
 });
 // User
 const User = mongoose.model("user", userSchema);

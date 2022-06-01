@@ -1,4 +1,5 @@
 const Pay = require("../models/payModel");
+const User = require("../models/usersModel");
 const mongoose = require("mongoose");
 const handleErrorAsync = require("../service/handleErrorAsync");
 const { Merchant, CreditOneTimePayment } = require("node-ecpay-aio");
@@ -65,7 +66,15 @@ const pay = {
         new: true,
       }
     );
-    // console.log(updatePay);
+    await User.findByIdAndUpdate(updatePay.user.id, {
+      premiumMember: {
+        paid: 1,
+        pay: updatePay.id,
+        startAt: updatePay.createdAt,
+      },
+    });
+    // console.log("updatePay", updatePay);
+    // console.log("newUser", newUser);
     // res.status(200).json({
     //   status: "success",
     //   data: updatePay,
