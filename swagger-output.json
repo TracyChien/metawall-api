@@ -1,0 +1,997 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MetaWall-API",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "headers",
+      "name": "Authorization",
+      "description": "Token 前請加上 Bearer，<code>Bearer ＜Token＞</code>"
+    }
+  },
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/posts/": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "delete": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/posts/{id}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "patch": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/posts/{id}/likes": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/posts/{id}/unlikes": {
+      "delete": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/posts/user/{id}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/posts/{id}/comment": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/posts/comment/{id}": {
+      "patch": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users/sign_up": {
+      "post": {
+        "tags": [
+          "會員功能"
+        ],
+        "summary": "使用者註冊",
+        "description": "\r 參數用法：\r <ul>\r <li>欄位 <code>\"password\"</code> 長度8-12</li>\r <li>欄位 <code>\"gender\"</code> 只能接受 <code>\"male\"</code>、<code>\"female\"</code>、<code>\"\"</code>。</li>\r </ul>\r ",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "type": "object",
+            "required": "success",
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "tt@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "tttttttt"
+                },
+                "confirmPassword": {
+                  "type": "string",
+                  "example": "tttttttt"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "TT"
+                }
+              },
+              "required": [
+                "email",
+                "password",
+                "confirmPassword",
+                "name"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "登入資訊",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTcwNGRjYWE3M2YwMmRiZTFkNThhZSIsImlhdCI6MTY1NDA2NDM0OCwiZXhwIjoxNjU0NjY5MTQ4fQ.xm23pCNkQb9X_U1kRUOW11nLV1EN31D211OeGKeKhUs"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "TT"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/sign_in": {
+      "post": {
+        "tags": [
+          "會員功能"
+        ],
+        "summary": "使用者登入",
+        "description": "\r 參數用法：\r <ul>\r <li>登入以 mail 為帳號</li>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r </ul>\r ",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "type": "object",
+            "required": "success",
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "tt@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "wwwwwwww"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "登入資訊",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "Token"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "王小明"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "tags": [
+          "會員功能"
+        ],
+        "summary": "取得個人資料",
+        "description": "\r 參數用法：\r <ul>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r </ul>\r ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "個人資訊",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "premiumMember": {
+                      "type": "object",
+                      "properties": {
+                        "paid": {
+                          "type": "number",
+                          "example": 0
+                        }
+                      }
+                    },
+                    "_id": {
+                      "type": "string",
+                      "example": "629704dcaa73f02dbe1d58ae"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "TT"
+                    },
+                    "followers": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "following": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "__v": {
+                      "type": "number",
+                      "example": 0
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "會員功能"
+        ],
+        "summary": "更新個人資料",
+        "description": "\r 參數用法：\r <ul>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r </ul>\r ",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "type": "object",
+            "required": "success",
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "qq"
+                },
+                "sex": {
+                  "type": "string",
+                  "example": "female"
+                },
+                "photo": {
+                  "type": "string",
+                  "example": "http://url"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "更新個人資料",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "TT"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/users/updatePassword": {
+      "patch": {
+        "tags": [
+          "會員功能"
+        ],
+        "summary": "重設密碼",
+        "description": "\r 參數用法：\r <ul>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r </ul>\r ",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "type": "object",
+            "required": "success",
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "type": "string",
+                  "example": "wwwwwwww"
+                },
+                "confirmPassword": {
+                  "type": "string",
+                  "example": "wwwwwwww"
+                }
+              },
+              "required": [
+                "password",
+                "confirmPassword"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "密碼變更",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "token"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "TT"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/users/check": {
+      "get": {
+        "tags": [
+          "會員功能"
+        ],
+        "summary": "確認登入狀態",
+        "description": "\r 參數用法：\r <ul>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r </ul>\r ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "更新個人資料",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "mongoDB id"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "TT"
+                    },
+                    "photo": {
+                      "type": "string",
+                      "example": "link"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/users/getLikeList": {
+      "get": {
+        "tags": [
+          "會員按讚追踨"
+        ],
+        "summary": "取得個人按讚列表",
+        "description": "\r 參數用法：\r <ul>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r </ul>\r ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "更新個人資料",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "likeList": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "629385506e8e3e5187847dea"
+                      },
+                      "content": {
+                        "type": "string",
+                        "example": "測試05288"
+                      },
+                      "image": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "6291f79b4e58b922713c7ef9"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "fgh"
+                          }
+                        }
+                      },
+                      "likes": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string",
+                              "example": "629704dcaa73f02dbe1d58ae"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "TT"
+                            }
+                          }
+                        }
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "629385506e8e3e5187847dea"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/users/{id}/follow": {
+      "post": {
+        "tags": [
+          "會員按讚追踨"
+        ],
+        "summary": "追蹤朋友",
+        "description": "\r 參數用法：\r <ul>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r <li>網址路由以 <code>:id</code> 傳入參數，直接針對 Users 中的 document id 進行資料更新。</li>\r </ul>\r ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "追蹤朋友",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "您已成功追蹤！"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/users/{id}/unfollow": {
+      "delete": {
+        "tags": [
+          "會員按讚追踨"
+        ],
+        "summary": "取消追蹤朋友",
+        "description": "\r 參數用法：\r <ul>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r <li>網址路由以 <code>:id</code> 傳入參數，直接針對 Users 中的 document id 進行資料更新。</li>\r </ul>\r ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "取消追蹤朋友",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "您已成功取消追蹤！"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/users/following": {
+      "get": {
+        "tags": [
+          "會員按讚追踨"
+        ],
+        "summary": "取得個人追蹤名單",
+        "description": "\r 參數用法：\r <ul>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r </ul>\r ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "取得個人追蹤名單",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "following": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "mongoDB id"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "abc1234"
+                          }
+                        }
+                      },
+                      "_id": {
+                        "type": "string",
+                        "example": "mongoDB id"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/users/followers": {
+      "get": {
+        "tags": [
+          "會員按讚追踨"
+        ],
+        "summary": "取得個人粉絲名單",
+        "description": "\r 參數用法：\r <ul>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r </ul>\r ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "取得個人粉絲名單",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "followers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "mongoDB id"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "abc1234"
+                          }
+                        }
+                      },
+                      "_id": {
+                        "type": "string",
+                        "example": "mongoDB id"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/users/getTradeList": {
+      "get": {
+        "tags": [
+          "會員功能"
+        ],
+        "summary": "取得個人付款紀錄",
+        "description": "\r 參數用法：\r <ul>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r </ul>\r ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "取得個人付款紀錄",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "results": {
+                  "type": "number",
+                  "example": 1
+                },
+                "list": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "mongoDB id"
+                      },
+                      "tradeNo": {
+                        "type": "string",
+                        "example": "MWWxxxxxxxxxx"
+                      },
+                      "tradeType": {
+                        "type": "string",
+                        "example": "creditonetime"
+                      },
+                      "totalAmount": {
+                        "type": "number",
+                        "example": 1000
+                      },
+                      "tradeDesc": {
+                        "type": "string",
+                        "example": "會員費用"
+                      },
+                      "itemName": {
+                        "type": "string",
+                        "example": "會員費用"
+                      },
+                      "tradeStatus": {
+                        "type": "number",
+                        "example": 2
+                      },
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string",
+                            "example": "mongoDB id"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "TT"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/upload/": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/pay/": {
+      "get": {
+        "tags": [
+          "pay (綠界)"
+        ],
+        "description": "\r <p>產生訂單並要求付款</p>\r 參數用法：\r <ul>\r <li>取得 Token 至上方 Authorize 按鈕以格式 <code>Bearer ＜Token＞</code> 加入設定，swagger 文件中鎖頭上鎖表示登入，可使用登入權限。</li>\r </ul>\r ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "\n 取得form data\n ",
+            "schema": {
+              "1": {
+                "example": "1"
+              },
+              "type": "string",
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/pay/tradeConfirm": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/pay/tradeResult/{id}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    }
+  },
+  "definitions": {}
+}
