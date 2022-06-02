@@ -4,7 +4,9 @@ const { isAuth } = require("../service/auth");
 
 const PayController = require("../controllers/pay");
 
-router.get("/", isAuth, async function (req, res, next) {
+router.get(
+  "/",
+  isAuth,
   /*
       #swagger.tags = ['pay (綠界)'],
       #swagger.security = [{
@@ -18,7 +20,7 @@ router.get("/", isAuth, async function (req, res, next) {
           </ul>
         `,
     */
-  PayController.createPay(req, res, next);
+  PayController.createPay
   /*
       * #swagger.responses[200] = {
         description: `
@@ -27,15 +29,11 @@ router.get("/", isAuth, async function (req, res, next) {
           schema:"1"
       }
       */
-});
+);
 
-router.post("/tradeConfirm", async function (req, res, next) {
-  PayController.tradeConfirm(req, res, next);
-});
+router.post("/tradeConfirm", PayController.tradeConfirm);
 
-router.get("/tradeResult/:id", isAuth, async function (req, res, next) {
-  PayController.getTradeResult(req, res, next);
-});
+router.get("/tradeResult/:id", isAuth, PayController.getTradeResult);
 
 // router.get("/tradeList/:id", isAuth, async function (req, res, next) {
 //   PayController.getTradeListByUserId(req, res, next);

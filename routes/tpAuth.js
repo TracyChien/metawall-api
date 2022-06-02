@@ -42,9 +42,7 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", { session: false }),
-  async function (req, res, next) {
-    AuthController.googleCallback(req, res, next);
-  }
+  AuthController.googleCallback
 );
 
 // Facebook OAuth
@@ -53,9 +51,7 @@ router.get("/facebook", passport.authenticate("facebook"));
 router.get(
   "/facebook/callback",
   passport.authenticate("facebook", { session: false }),
-  async function (req, res, next) {
-    AuthController.facebookCallback(req, res, next);
-  }
+  AuthController.facebookCallback
 );
 
 module.exports = router;

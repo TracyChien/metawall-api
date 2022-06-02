@@ -4,7 +4,8 @@ const { isAuth } = require("../service/auth");
 
 const UserController = require("../controllers/users");
 
-router.post("/sign_up", async function (req, res, next) {
+router.post(
+  "/sign_up",
   /*
       #swagger.tags = ['會員功能'],
       #swagger.summary = '使用者註冊'
@@ -38,9 +39,10 @@ router.post("/sign_up", async function (req, res, next) {
       }
       },
     */
-  UserController.singUp(req, res, next);
-});
-router.post("/sign_in", async function (req, res, next) {
+  UserController.singUp
+);
+router.post(
+  "/sign_in",
   /*
       #swagger.tags = ['會員功能'],
       #swagger.summary = '使用者登入'
@@ -72,9 +74,11 @@ router.post("/sign_in", async function (req, res, next) {
         }
       },
     */
-  UserController.singIn(req, res, next);
-});
-router.get("/profile", isAuth, async function (req, res, next) {
+  UserController.singIn
+);
+router.get(
+  "/profile",
+  isAuth,
   /*
       #swagger.tags = ['會員功能'],
       #swagger.summary = '取得個人資料'
@@ -104,9 +108,11 @@ router.get("/profile", isAuth, async function (req, res, next) {
         }
       },
     */
-  UserController.getProfile(req, res, next);
-});
-router.patch("/updatePassword", isAuth, async function (req, res, next) {
+  UserController.getProfile
+);
+router.patch(
+  "/updatePassword",
+  isAuth,
   /*
       #swagger.tags = ['會員功能'],
       #swagger.summary = '重設密碼'
@@ -140,9 +146,11 @@ router.patch("/updatePassword", isAuth, async function (req, res, next) {
         }
       },
     */
-  UserController.updatePassword(req, res, next);
-});
-router.patch("/profile", isAuth, async function (req, res, next) {
+  UserController.updatePassword
+);
+router.patch(
+  "/profile",
+  isAuth,
   /*
       #swagger.tags = ['會員功能'],
       #swagger.summary = '更新個人資料'
@@ -176,9 +184,11 @@ router.patch("/profile", isAuth, async function (req, res, next) {
         }
       },
     */
-  UserController.updateProfile(req, res, next);
-});
-router.get("/check", isAuth, async function (req, res, next) {
+  UserController.updateProfile
+);
+router.get(
+  "/check",
+  isAuth,
   /*
       #swagger.tags = ['會員功能'],
       #swagger.summary = '確認登入狀態'
@@ -203,9 +213,11 @@ router.get("/check", isAuth, async function (req, res, next) {
         }
       },
     */
-  UserController.check(req, res, next);
-});
-router.get("/getLikeList", isAuth, async function (req, res, next) {
+  UserController.check
+);
+router.get(
+  "/getLikeList",
+  isAuth,
   /*
       #swagger.tags = ['會員按讚追踨'],
       #swagger.summary = '取得個人按讚列表'
@@ -251,9 +263,11 @@ router.get("/getLikeList", isAuth, async function (req, res, next) {
         }
       },
     */
-  UserController.getLikeList(req, res, next);
-});
-router.post("/:id/follow", isAuth, async function (req, res, next) {
+  UserController.getLikeList
+);
+router.post(
+  "/:id/follow",
+  isAuth,
   /*
       #swagger.tags = ['會員按讚追踨'],
       #swagger.summary = '追蹤朋友'
@@ -281,9 +295,11 @@ router.post("/:id/follow", isAuth, async function (req, res, next) {
         }
       },
     */
-  UserController.follow(req, res, next);
-});
-router.delete("/:id/unfollow", isAuth, async function (req, res, next) {
+  UserController.follow
+);
+router.delete(
+  "/:id/unfollow",
+  isAuth,
   /*
       #swagger.tags = ['會員按讚追踨'],
       #swagger.summary = '取消追蹤朋友'
@@ -311,9 +327,11 @@ router.delete("/:id/unfollow", isAuth, async function (req, res, next) {
         }
       },
     */
-  UserController.unFollow(req, res, next);
-});
-router.get("/following", isAuth, async function (req, res, next) {
+  UserController.unFollow
+);
+router.get(
+  "/following",
+  isAuth,
   /*
       #swagger.tags = ['會員按讚追踨'],
       #swagger.summary = '取得個人追蹤名單'
@@ -342,9 +360,11 @@ router.get("/following", isAuth, async function (req, res, next) {
         }
       },
     */
-  UserController.getFollowing(req, res, next);
-});
-router.get("/followers", isAuth, async function (req, res, next) {
+  UserController.getFollowing
+);
+router.get(
+  "/followers",
+  isAuth,
   /*
       #swagger.tags = ['會員按讚追踨'],
       #swagger.summary = '取得個人粉絲名單'
@@ -373,9 +393,11 @@ router.get("/followers", isAuth, async function (req, res, next) {
         }
       },
     */
-  UserController.getFollowers(req, res, next);
-});
-router.get("/getTradeList", isAuth, async function (req, res, next) {
+  UserController.getFollowers
+);
+router.get(
+  "/getTradeList",
+  isAuth,
   /*
       #swagger.tags = ['會員功能'],
       #swagger.summary = '取得個人付款紀錄'
@@ -411,8 +433,8 @@ router.get("/getTradeList", isAuth, async function (req, res, next) {
         }
       },
     */
-  UserController.getTradeList(req, res, next);
-});
+  UserController.getTradeList
+);
 // router.get("/checkPay", isAuth, async function (req, res, next) {
 //   UserController.checkPay(req, res, next);
 // });
