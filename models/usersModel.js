@@ -55,8 +55,15 @@ const userSchema = new mongoose.Schema({
       type: Date,
     },
   },
-  googleID: {
-    type: String,
+  thirdParty: {
+    googleID: {
+      type: String,
+      default: "0",
+    },
+    facebookID: {
+      type: String,
+      default: "0",
+    },
   },
 });
 // User

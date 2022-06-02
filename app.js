@@ -21,7 +21,7 @@ const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
 const uploadRouter = require("./routes/upload");
 const paymentRouter = require("./routes/pay");
-const authRouter = require("./routes/auth");
+const tpAuthRouter = require("./routes/tpAuth");
 
 var app = express();
 
@@ -38,7 +38,7 @@ app.use("/posts", postsRouter);
 app.use("/users", usersRouter);
 app.use("/upload", uploadRouter);
 app.use("/pay", paymentRouter);
-app.use("/auth", authRouter);
+app.use("/tp-auth", tpAuthRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {

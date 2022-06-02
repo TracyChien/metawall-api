@@ -20,6 +20,16 @@ const generateSendJWT = (user, statusCode, res) => {
   });
 };
 
+const generateRedirectJWT = (user, res) => {
+  // 產生 JWT token
+  //   jwt.verify(token, secretOrPublicKey, [options, callback])
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_DAY,
+  });
+  user.password = undefined;
+  res.redirect(`${process.env.FRONTEND_URL}?t=${token}`);
+};
+
 const isAuth = handleErrorAsync(async (req, res, next) => {
   let token;
   if (
@@ -49,4 +59,5 @@ const isAuth = handleErrorAsync(async (req, res, next) => {
 module.exports = {
   isAuth,
   generateSendJWT,
+  generateRedirectJWT,
 };
